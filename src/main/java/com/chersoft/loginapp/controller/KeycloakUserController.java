@@ -1,9 +1,12 @@
 package com.chersoft.loginapp.controller;
 
+import com.chersoft.loginapp.client.KeycloakUserClient;
 import com.chersoft.loginapp.exception.UserAlreadyExistsException;
 import com.chersoft.loginapp.security.KeycloakUser;
 import com.chersoft.loginapp.security.RequestData;
 import com.chersoft.loginapp.service.KeycloakUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/user")
 public class KeycloakUserController {
 
+    Logger logger = LoggerFactory.getLogger(KeycloakUserController.class);
+
     @Autowired
     KeycloakUserService keycloakUserService;
 
@@ -21,6 +26,7 @@ public class KeycloakUserController {
     @GetMapping()
     public String getStatus() {
         try {
+            logger.info("GET STATUS");
             return "Estado ok";
         } catch (Exception e) {
             return "Estado error";
