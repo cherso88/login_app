@@ -66,24 +66,30 @@ public class KeycloakUserClient {
     }
 
     private KeycloakToken sendRequest(HttpClient httpClient, HttpRequest httpRequest) throws IOException, InterruptedException, LoginException {
+        logger.info("5");
 
         KeycloakToken keycloakToken = null;
+        logger.info("6");
 
         try {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            logger.info("7");
 
             String responseBody = httpResponse.body();
+            logger.info("8");
 
             if (responseBody != null && httpResponse.statusCode() == 200) {
                 keycloakToken = parseToKeycloakToken(responseBody);
             } else {
                 throw new LoginException("Failed to login: Error Code: " + httpResponse.statusCode());
             }
+            logger.info("9");
 
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw e;
         }
+        logger.info("10");
 
         return keycloakToken;
     }
