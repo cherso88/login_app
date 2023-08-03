@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . .
 
 EXPOSE 5005
+EXPOSE 8080
 # Build the project with Maven
 RUN mvn clean package
 
