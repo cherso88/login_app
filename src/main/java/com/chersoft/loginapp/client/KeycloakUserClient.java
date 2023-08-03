@@ -34,15 +34,19 @@ public class KeycloakUserClient {
     }
 
     public KeycloakToken getUserToken(String url, String user, String pass, String clientId, String grantType, String secret) throws IOException, InterruptedException, LoginException {
+        logger.info("1");
         HttpClient httpClient = HttpClient.newHttpClient();
+        logger.info("2");
 
         String formData = "grant_type=" + grantType + "&client_id=" + clientId + "&username=" + user + "&password=" + pass + "&client_secret=" + secret;
+        logger.info("3");
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .POST(HttpRequest.BodyPublishers.ofString(formData.trim()))
                 .build();
+        logger.info("4");
 
         return sendRequest(httpClient, httpRequest);
     }
