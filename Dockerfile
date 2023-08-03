@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy the project files to the container
 COPY . .
 
+EXPOSE 5005
 # Build the project with Maven
 RUN mvn clean package
 
