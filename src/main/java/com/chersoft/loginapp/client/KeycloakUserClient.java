@@ -34,19 +34,15 @@ public class KeycloakUserClient {
     }
 
     public KeycloakToken getUserToken(String url, String user, String pass, String clientId, String grantType, String secret) throws IOException, InterruptedException, LoginException {
-        logger.info("1");
         HttpClient httpClient = HttpClient.newHttpClient();
-        logger.info("2");
 
         String formData = "grant_type=" + grantType + "&client_id=" + clientId + "&username=" + user + "&password=" + pass + "&client_secret=" + secret;
-        logger.info("3");
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .POST(HttpRequest.BodyPublishers.ofString(formData.trim()))
                 .build();
-        logger.info("4");
 
         return sendRequest(httpClient, httpRequest);
     }
@@ -66,24 +62,19 @@ public class KeycloakUserClient {
     }
 
     private KeycloakToken sendRequest(HttpClient httpClient, HttpRequest httpRequest) throws IOException, InterruptedException, LoginException {
-        logger.info("5");
 
         KeycloakToken keycloakToken = null;
-        logger.info("6");
 
         try {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            logger.info("7");
 
             String responseBody = httpResponse.body();
-            logger.info("8");
 
             if (responseBody != null && httpResponse.statusCode() == 200) {
                 keycloakToken = parseToKeycloakToken(responseBody);
             } else {
                 throw new LoginException("Failed to login: Error Code: " + httpResponse.statusCode());
             }
-            logger.info("9");
 
         } catch (Exception e) {
             logger.error(e.getMessage());
