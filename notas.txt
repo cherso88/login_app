@@ -1,0 +1,6 @@
+PASOS DESDE QUE SE CREA EL CONTENEDOR.
+1. PASAR ADMIN-CLI A CONFIDENCIAL
+2. PRENDER AUTHORIZATION ENABLED
+
+3. CREO REALM TASKAPP
+4. DESDE EL REALM MASTER -> vamos a clients y en client roles buscamos taskApp-realm -> y agregamos los roles que queremos
